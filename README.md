@@ -126,8 +126,8 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/cinestream.git
-cd cinestream
+git clone https://github.com/CapBraco/CineStream.git
+cd CineStream
 
 # Install dependencies
 npm install
@@ -154,7 +154,7 @@ npm run build
 
 ```bash
 # Update homepage in package.json
-"homepage": "https://yourusername.github.io/cinestream"
+"homepage": "https://CapBraco.github.io/cinestream"
 
 # Deploy
 npm run deploy
@@ -458,8 +458,8 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 ## 📞 Contact & Links
 
 **Portfolio**: [www.capbraco.com](https://www.capbraco.com)  
-**GitHub**: [@yourusername](https://github.com/yourusername)  
-**Project Link**: [CineStream Repository](https://github.com/yourusername/cinestream)  
+**GitHub**: [@yourusername](https://github.com/CapBraco)  
+**Project Link**: [CineStream Repository](https://github.com/CapBraco/CineStream)  
 
 ---
 
@@ -515,7 +515,7 @@ Built this project to learn React? Here are resources:
 
 If you find this project useful, please consider giving it a ⭐️!
 
-[![Stargazers over time](https://starchart.cc/yourusername/cinestream.svg)](https://starchart.cc/yourusername/cinestream)
+[![Stargazers over time](https://starchart.cc/yourusername/cinestream.svg)](https://starchart.cc/CapBraco/CineStream)
 
 ---
 
