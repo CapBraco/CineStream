@@ -1,4 +1,4 @@
-import GenreSelector from "../components/GenreSelector";
+import NavBar from "../components/NavBar";
 import MovieList from "../components/MovieList";
 import MovieInfo from "../components/MovieInfo";
 import FeaturedMovie from "../components/FeaturedMovie";
@@ -14,46 +14,80 @@ const GenresContainer = () => {
   const { categories } = useGenres();
   const [selectedGenre, setSelectedGenre] = useState(null);
   const [selectedMovie, setSelectedMovie] = useState(null);
- // ⚡ Cargar un género por defecto al iniciar
+
+  // Load default genre when categories are available
   useEffect(() => {
     if (categories && categories.length > 0 && !selectedGenre) {
-      // puedes cambiar el índice o el nombre del género que prefieras
-      setSelectedGenre(categories[0].id); 
+      setSelectedGenre(categories[0].id);
     }
   }, [categories, selectedGenre]);
-
 
   const { movies, loading } = useMovies(selectedGenre);
   const { movieInfo } = useMovieInfo(selectedMovie);
   const { movie: randomMovie } = useRandomMovie(selectedGenre);
   const { videos } = useMovieTrailer(selectedMovie);
 
+  const handleGenreChange = (genreId) => {
+    setSelectedGenre(genreId);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleMovieSelect = (movieId) => {
+    setSelectedMovie(movieId);
+  };
+
+  const handleMoreInfo = (movieId) => {
+    setSelectedMovie(movieId);
+  };
+
   return (
-    <div className="window">
-      <FeaturedMovie randomMovie={randomMovie} />
-      <GenreSelector 
+    <>
+      <NavBar
         categories={categories}
-        className="active"
-        onSelect={(id) => setSelectedGenre(id)}
+        onSelect={handleGenreChange}
+        selectedGenre={selectedGenre}
       />
 
-      {loading ? (
-        <p>Loading movies...</p>
-      ) : (
-        <MovieList
-          movies={movies}
-          onSelect={(id) => setSelectedMovie(id)}
-          categories={categories}
+      <div className="main with-sidebar" role="main">
+        <FeaturedMovie 
+          randomMovie={randomMovie} 
+          onMoreInfo={handleMoreInfo}
         />
-      )}
 
-        <MovieInfo
-        movieInfo={movieInfo}
-        onClose={() => setSelectedMovie(null)}>
-        {selectedMovie && videos.length > 0 && (<MovieTrailer videos={videos} />)}
-        </MovieInfo>
-      
-    </div>
+        {loading ? (
+          <div style={{ 
+            textAlign: 'center', 
+            padding: '40px', 
+            color: 'var(--text-secondary)' 
+          }}>
+            <p>Loading movies...</p>
+          </div>
+        ) : movies.length > 0 ? (
+          <MovieList
+            movies={movies}
+            onSelect={handleMovieSelect}
+            categories={categories}
+          />
+        ) : (
+          <div style={{ 
+            textAlign: 'center', 
+            padding: '40px', 
+            color: 'var(--text-secondary)' 
+          }}>
+            <p>No movies found for this genre.</p>
+          </div>
+        )}
+
+        {selectedMovie && movieInfo && (
+          <MovieInfo
+            movieInfo={movieInfo}
+            onClose={() => setSelectedMovie(null)}
+          >
+            {videos.length > 0 && <MovieTrailer videos={videos} />}
+          </MovieInfo>
+        )}
+      </div>
+    </>
   );
 };
 
