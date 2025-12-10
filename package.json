@@ -2,7 +2,7 @@
   "name": "movie-explorer-pro",
   "version": "2.0.0",
   "private": true,
-  "homepage": "https://CapBraco.github.io/movie-finder",
+  "homepage": "https://CapBraco.github.io/CineStream",
   "description": "A modern, sophisticated movie explorer inspired by Netflix, HBO, and Amazon Prime",
   "dependencies": {
     "@testing-library/jest-dom": "^6.9.1",
